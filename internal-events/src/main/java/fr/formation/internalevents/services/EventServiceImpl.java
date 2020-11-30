@@ -1,8 +1,12 @@
 package fr.formation.internalevents.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import fr.formation.internalevents.dtos.EventCreateDto;
+import fr.formation.internalevents.dtos.EventShortInfoDto;
 import fr.formation.internalevents.entities.Employee;
 import fr.formation.internalevents.entities.Event;
 import fr.formation.internalevents.entities.EventType;
@@ -59,6 +63,28 @@ public class EventServiceImpl implements EventService {
 		event.setRoom(room);
 
 		eventRepo.save(event);
+	}
+
+	@Override
+	public List<EventShortInfoDto> getAll() {
+
+		List<Event> events = eventRepo.findAll();
+		List<EventShortInfoDto> dtos = new ArrayList<>();
+		for (Event event : events) {
+			EventShortInfoDto dto = convertFrom(event);
+			dtos.add(dto);
+		}
+		return dtos;
+	}
+
+	private EventShortInfoDto convertFrom(Event event) {
+
+		EventShortInfoDto dto = new EventShortInfoDto();
+		dto.setTitle(event.getTitle());
+		dto.setStartDateTime(event.getStartDateTime());
+		dto.setEndDateTime(event.getEndDateTime());
+
+		return dto;
 	}
 
 }
