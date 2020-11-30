@@ -3,11 +3,9 @@ package fr.formation.internalevents.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import fr.formation.internalevents.entities.Role;
+import fr.formation.internalevents.entities.Room;
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role, Long> {
-	
-	Role findByDefaultRole(boolean defaultRole);
+public interface RoomRepository extends JpaRepository<Room, Long>{
 
 }

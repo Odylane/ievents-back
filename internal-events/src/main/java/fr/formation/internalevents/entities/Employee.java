@@ -12,9 +12,13 @@ import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="employees")
+@Table(name="employees", uniqueConstraints = {
+		@UniqueConstraint(name = "UK_username", columnNames = {"username"}), @UniqueConstraint(name = "UK_email", columnNames = {
+				"email"})
+})
 public class Employee {
 	
 	@Id
@@ -22,7 +26,7 @@ public class Employee {
 	@Column(name="id_employee")
 	private Long id;
 	
-	@Column(nullable=false, length=11, unique=true)
+	@Column(nullable=false, length=11)
 	private String username;
 	
 	@Column(nullable=false, length=100)
@@ -31,7 +35,7 @@ public class Employee {
 	@Column(nullable=false, length=100)
 	private String lastname;
 	
-	@Column(nullable=false, unique=true)
+	@Column(nullable=false)
 	private String email;
 	
 	@Column(nullable=false, length=100)
@@ -112,12 +116,12 @@ public class Employee {
     public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
+    
+    // password=[PROTECTED] for not displaying in logs
 
 	@Override
-    public String toString() {
-	// password=[PROTECTED] for not displaying in logs
-	return "{id=" + id + ", username=" + username
-		+ ", password=[PROTECTED], roles=" + roles + ", role=" + roles + "}";
-    }
-
+	public String toString() {
+		return "Employee [id=" + id + ", username=" + username + ", password=[PROTECTED], roles=" + roles + "]";
+	}
+    
 }

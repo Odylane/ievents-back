@@ -9,5 +9,5 @@ public class InternalEventsApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(InternalEventsApplication.class, args);
 	}
-
+	
 }

@@ -9,21 +9,21 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="topics", uniqueConstraints = {
+@Table(name="event_types", uniqueConstraints = {
 		@UniqueConstraint(name="UK_name", columnNames = {"name"})
 })
-public class Topic {
+public class EventType {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_topic")
+	@Column(name="id_event_type")
 	private Long id;
 	
-	@Column(nullable = false, length=45)
+	@Column(nullable=false, length=45)
 	private String name;
 
-	public Topic() {
-		
+	public EventType() {
+	
 	}
 
 	public Long getId() {

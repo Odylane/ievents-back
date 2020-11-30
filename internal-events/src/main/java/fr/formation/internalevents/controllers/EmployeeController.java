@@ -27,7 +27,7 @@ public class EmployeeController {
 	this.service = service;
     }
 	
-	@PostMapping("/register")
+	@PostMapping("/employees")
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public void addNewAccount(@Valid @RequestBody EmployeeCreateDto inputs) {
 		service.create(inputs);

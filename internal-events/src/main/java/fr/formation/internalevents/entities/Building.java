@@ -9,20 +9,20 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="topics", uniqueConstraints = {
-		@UniqueConstraint(name="UK_name", columnNames = {"name"})
+@Table(name="buildings", uniqueConstraints = {
+		@UniqueConstraint(name= "UK_name", columnNames = "name")
 })
-public class Topic {
+public class Building {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_topic")
+	@Column(name="id_building")
 	private Long id;
 	
-	@Column(nullable = false, length=45)
+	@Column(nullable=false,length=45, unique=true)
 	private String name;
-
-	public Topic() {
+	
+	public Building() {
 		
 	}
 
