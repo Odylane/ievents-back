@@ -8,5 +8,6 @@ import fr.formation.internalevents.entities.EventType;
 @Repository
 public interface EventTypeRepository extends JpaRepository<EventType, Long> {
 
+	EventType findByName(String name);
 
 }

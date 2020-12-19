@@ -13,27 +13,24 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="rooms", uniqueConstraints = {
-		@UniqueConstraint(name = "UK_name", columnNames = {
-		"name"})}, indexes = {
-				@Index(name="fk_rooms_building_idx", columnList = "building_id")
-		})
+@Table(name = "rooms", uniqueConstraints = {
+		@UniqueConstraint(name = "UK_name", columnNames = { "name" }) }, indexes = {
+				@Index(name = "fk_rooms_building_idx", columnList = "building_id") })
 public class Room {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_room")
+	@Column(name = "id_room")
 	private Long id;
-	
-	@Column(nullable=false, length=45)
+
+	@Column(nullable = false, length = 45)
 	private String name;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private int capacity;
-	
-	
+
 	@ManyToOne
-	@JoinColumn(nullable=false, name="building_id",foreignKey= @ForeignKey(name="fk_rooms_buildings"))
+	@JoinColumn(nullable = false, name = "building_id", foreignKey = @ForeignKey(name = "fk_rooms_buildings"))
 	private Building building;
 
 	public Long getId() {
@@ -60,11 +57,17 @@ public class Room {
 		this.capacity = capacity;
 	}
 
+	public Building getBuilding() {
+		return building;
+	}
+
+	public void setBuilding(Building building) {
+		this.building = building;
+	}
+
 	@Override
 	public String toString() {
 		return "Room [id=" + id + ", name=" + name + ", capacity=" + capacity + ", building=" + building + "]";
 	}
-	
-	
 
 }

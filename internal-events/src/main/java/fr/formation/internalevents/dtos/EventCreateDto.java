@@ -10,6 +10,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import fr.formation.internalevents.validation.NotAdequateRoomCapacity;
+
+@NotAdequateRoomCapacity
 public class EventCreateDto {
 
 	@NotBlank

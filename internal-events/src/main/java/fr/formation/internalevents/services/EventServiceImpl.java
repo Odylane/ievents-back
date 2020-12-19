@@ -1,7 +1,7 @@
 package fr.formation.internalevents.services;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -68,23 +68,33 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public List<EventShortInfoDto> getAll() {
 
-		List<Event> events = eventRepo.findAll();
-		List<EventShortInfoDto> dtos = new ArrayList<>();
-		for (Event event : events) {
-			EventShortInfoDto dto = convertFrom(event);
-			dtos.add(dto);
-		}
-		return dtos;
+		return eventRepo.findAll().stream().map(this::convertFrom).collect(Collectors.toList());
 	}
 
 	private EventShortInfoDto convertFrom(Event event) {
 
 		EventShortInfoDto dto = new EventShortInfoDto();
+		dto.setIdEvent(event.getId());
 		dto.setTitle(event.getTitle());
 		dto.setStartDateTime(event.getStartDateTime());
 		dto.setEndDateTime(event.getEndDateTime());
 
+		EventType eventType = event.getEventType();
+		dto.setNameEventType(eventType.getName());
+
+		Room room = event.getRoom();
+		dto.setNameRoom(room.getName());
+		Room roomBuilding = event.getRoom();
+		dto.setNameBuilding(roomBuilding.getBuilding().getName());
+
 		return dto;
+	}
+
+	@Override
+	public boolean checkRoomCapacity(int numberOfPlacesByEvent, Long RoomIdRequested) {
+		Room roomRequested = roomRepo.findById(RoomIdRequested).orElseThrow(() -> new NullPointerException());
+		int roomCapacity = roomRequested.getCapacity();
+		return (numberOfPlacesByEvent <= roomCapacity);
 	}
 
 }

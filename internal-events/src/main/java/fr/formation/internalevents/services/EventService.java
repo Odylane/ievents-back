@@ -11,4 +11,6 @@ public interface EventService {
 
 	List<EventShortInfoDto> getAll();
 
+	boolean checkRoomCapacity(int numberOfPlacesByEvent, Long RoomIdRequested);
+
 }

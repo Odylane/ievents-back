@@ -16,7 +16,7 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "events", uniqueConstraints = {
-		@UniqueConstraint(name = "UK_start_date_time_speaker_name_room", columnNames = { "start_date_time",
+		@UniqueConstraint(name = "UK_start_date_time_speaker_name", columnNames = { "start_date_time",
 				"speaker_name" }) }, indexes = {
 						@Index(name = "fk_events_event_types_idx", columnList = "event_type_id"),
 						@Index(name = "fk_events_topics_idx", columnList = "topic_id"),

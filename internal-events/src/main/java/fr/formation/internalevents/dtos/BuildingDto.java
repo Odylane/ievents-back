@@ -1,8 +1,10 @@
 package fr.formation.internalevents.dtos;
 
 public class BuildingDto {
-	
+
 	private Long id;
+
+	private String name;
 
 	public BuildingDto() {
 	}
@@ -15,6 +17,12 @@ public class BuildingDto {
 		this.id = id;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 }
-
-
