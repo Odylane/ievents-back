@@ -5,9 +5,6 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,12 +19,7 @@ import javax.persistence.UniqueConstraint;
 						@Index(name = "fk_events_topics_idx", columnList = "topic_id"),
 						@Index(name = "fk_events_rooms_idx", columnList = "room_id"),
 						@Index(name = "fk_events_employees_idx", columnList = "employee_organizer_id") })
-public class Event {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_event")
-	private Long id;
+public class Event extends AbstractEntity {
 
 	@Column(nullable = false, length = 75)
 	private String title;
@@ -48,30 +40,22 @@ public class Event {
 	private String speakerName;
 
 	@ManyToOne
-	@JoinColumn(name = "event_type_id", referencedColumnName = "id_event_type", foreignKey = @ForeignKey(name = "fk_events_event_types"))
+	@JoinColumn(name = "event_type_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_events_event_types"))
 	private EventType eventType;
 
 	@ManyToOne
-	@JoinColumn(name = "topic_id", referencedColumnName = "id_topic", foreignKey = @ForeignKey(name = "fk_events_topics"))
+	@JoinColumn(name = "topic_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_events_topics"))
 	private Topic topic;
 
 	@ManyToOne
-	@JoinColumn(name = "room_id", referencedColumnName = "id_room", foreignKey = @ForeignKey(name = "fk_events_rooms"))
+	@JoinColumn(name = "room_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_events_rooms"))
 	private Room room;
 
 	@ManyToOne
-	@JoinColumn(name = "employee_organizer_id", referencedColumnName = "id_employee", foreignKey = @ForeignKey(name = "fk_events_employees"))
+	@JoinColumn(name = "employee_organizer_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_events_employees"))
 	private Employee employeeOrganizer;
 
 	public Event() {
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getTitle() {
@@ -156,10 +140,10 @@ public class Event {
 
 	@Override
 	public String toString() {
-		return "Event [id=" + id + ", title=" + title + ", startDateTime=" + startDateTime + ", endDateTime="
-				+ endDateTime + ", description=" + description + ", numberOfPlaces=" + numberOfPlaces + ", speakerName="
-				+ speakerName + ", eventType=" + eventType + ", topic=" + topic + ", room=" + room
-				+ ", employeeOrganizer=" + employeeOrganizer + "]";
+		return "Event [title=" + title + ", startDateTime=" + startDateTime + ", endDateTime=" + endDateTime
+				+ ", description=" + description + ", numberOfPlaces=" + numberOfPlaces + ", speakerName=" + speakerName
+				+ ", eventType=" + eventType + ", topic=" + topic + ", room=" + room + ", employeeOrganizer="
+				+ employeeOrganizer + "]";
 	}
 
 }
