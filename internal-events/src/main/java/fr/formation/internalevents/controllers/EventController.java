@@ -33,8 +33,7 @@ public class EventController {
 
 	@GetMapping
 	public List<EventShortInfoDto> getAll() {
-		List<EventShortInfoDto> eventShortInfo = service.getAll();
-		return eventShortInfo;
+		return service.getAll();
 	}
 
 }

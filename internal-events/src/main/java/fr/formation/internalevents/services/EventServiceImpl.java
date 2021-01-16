@@ -1,7 +1,8 @@
 package fr.formation.internalevents.services;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -68,7 +69,14 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public List<EventShortInfoDto> getAll() {
 
-		return eventRepo.findAll().stream().map(this::convertFrom).collect(Collectors.toList());
+		List<Event> events = eventRepo.findByStartDateTimeGreaterThan(LocalDateTime.now());
+		List<EventShortInfoDto> dtos = new ArrayList<>();
+		for (Event event : events) {
+			EventShortInfoDto dto = convertFrom(event);
+			dtos.add(dto);
+		}
+		return dtos;
+
 	}
 
 	private EventShortInfoDto convertFrom(Event event) {
@@ -88,6 +96,7 @@ public class EventServiceImpl implements EventService {
 		dto.setNameBuilding(roomBuilding.getBuilding().getName());
 
 		return dto;
+
 	}
 
 	@Override
