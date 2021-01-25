@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import fr.formation.internalevents.dtos.EventCreateDto;
+import fr.formation.internalevents.dtos.EventFullInfoDto;
 import fr.formation.internalevents.dtos.EventShortInfoDto;
 import fr.formation.internalevents.entities.Employee;
 import fr.formation.internalevents.entities.Event;
@@ -53,23 +54,35 @@ public class EventServiceImpl implements EventService {
 		event.setEndDateTime(dto.getEndDateTime());
 		event.setNumberOfPlaces(dto.getNumberOfPlaces());
 
+		setEventType(event, dto.getEventTypeId());
+		setRoom(event, dto.getRoomId());
+		setTopic(event, dto.getTopicId());
+
 		Employee employeeOrganizer = employeeRepo.getOne(dto.getEmployeeOrganizer().getId());
 		event.setEmployeeOrganizer(employeeOrganizer);
 
-		EventType eventType = eventTypeRepo.getOne(dto.getEventType().getId());
-		event.setEventType(eventType);
-		Topic topic = topicRepo.getOne(dto.getTopic().getId());
-		event.setTopic(topic);
-		Room room = roomRepo.getOne(dto.getRoom().getId());
-		event.setRoom(room);
-
 		eventRepo.save(event);
+	}
+
+	private void setEventType(Event event, Long eventTypeId) {
+		EventType eventType = eventTypeRepo.getOne(eventTypeId);
+		event.setEventType(eventType);
+	}
+
+	private void setRoom(Event event, Long roomId) {
+		Room room = roomRepo.getOne(roomId);
+		event.setRoom(room);
+	}
+
+	private void setTopic(Event event, Long topicId) {
+		Topic topic = topicRepo.getOne(topicId);
+		event.setTopic(topic);
 	}
 
 	@Override
 	public List<EventShortInfoDto> getAll() {
 
-		List<Event> events = eventRepo.findByStartDateTimeGreaterThan(LocalDateTime.now());
+		List<Event> events = eventRepo.findByStartDateTimeGreaterThanOrderByStartDateTimeAsc(LocalDateTime.now());
 		List<EventShortInfoDto> dtos = new ArrayList<>();
 		for (Event event : events) {
 			EventShortInfoDto dto = convertFrom(event);
@@ -82,10 +95,9 @@ public class EventServiceImpl implements EventService {
 	private EventShortInfoDto convertFrom(Event event) {
 
 		EventShortInfoDto dto = new EventShortInfoDto();
-		dto.setIdEvent(event.getId());
+		dto.setId(event.getId());
 		dto.setTitle(event.getTitle());
 		dto.setStartDateTime(event.getStartDateTime());
-		dto.setEndDateTime(event.getEndDateTime());
 
 		EventType eventType = event.getEventType();
 		dto.setNameEventType(eventType.getName());
@@ -96,6 +108,13 @@ public class EventServiceImpl implements EventService {
 		dto.setNameBuilding(roomBuilding.getBuilding().getName());
 
 		return dto;
+
+	}
+
+	@Override
+	public EventFullInfoDto getOneEvent(Long id) {
+
+		return eventRepo.getById(id);
 
 	}
 
