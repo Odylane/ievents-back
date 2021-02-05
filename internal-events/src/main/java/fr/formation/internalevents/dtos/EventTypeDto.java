@@ -2,28 +2,21 @@ package fr.formation.internalevents.dtos;
 
 public class EventTypeDto {
 
-	private Long id;
+	private final Long id;
 
-	private String name;
+	private final String name;
 
-	public EventTypeDto() {
-
+	public EventTypeDto(Long id, String name) {
+		this.id = id;
+		this.name = name;
 	}
 
 	public Long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public String getName() {
 		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 }
