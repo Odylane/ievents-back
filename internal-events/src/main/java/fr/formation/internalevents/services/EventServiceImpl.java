@@ -57,9 +57,7 @@ public class EventServiceImpl implements EventService {
 		setEventType(event, dto.getEventTypeId());
 		setRoom(event, dto.getRoomId());
 		setTopic(event, dto.getTopicId());
-
-		Employee employeeOrganizer = employeeRepo.getOne(dto.getEmployeeOrganizer().getId());
-		event.setEmployeeOrganizer(employeeOrganizer);
+		setEmployee(event, dto.getEmployeeOrganizerId());
 
 		eventRepo.save(event);
 	}
@@ -77,6 +75,11 @@ public class EventServiceImpl implements EventService {
 	private void setTopic(Event event, Long topicId) {
 		Topic topic = topicRepo.getOne(topicId);
 		event.setTopic(topic);
+	}
+
+	private void setEmployee(Event event, Long employeeOrganizerId) {
+		Employee employeeOrganizer = employeeRepo.getOne(employeeOrganizerId);
+		event.setEmployeeOrganizer(employeeOrganizer);
 	}
 
 	@Override

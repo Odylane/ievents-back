@@ -10,9 +10,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import fr.formation.internalevents.validation.NotAdequateRoomCapacity;
-
-@NotAdequateRoomCapacity
+//@NotAdequateRoomCapacity
 public class EventCreateDto {
 
 	@NotBlank
@@ -39,16 +37,16 @@ public class EventCreateDto {
 	private String speakerName;
 
 	@Valid
-	private EventTypeDto eventType;
+	private Long eventTypeId;
 
 	@Valid
-	private TopicDto topic;
+	private Long topicId;
 
 	@Valid
-	private RoomDto room;
+	private Long roomId;
 
 	@Valid
-	private EmployeeDto employeeOrganizer;
+	private Long employeeOrganizerId;
 
 	public EventCreateDto() {
 		//
@@ -102,36 +100,36 @@ public class EventCreateDto {
 		this.speakerName = speakerName;
 	}
 
-	public EventTypeDto getEventType() {
-		return eventType;
+	public Long getEventTypeId() {
+		return eventTypeId;
 	}
 
-	public void setEventType(EventTypeDto eventType) {
-		this.eventType = eventType;
+	public void setEventTypeId(Long eventTypeId) {
+		this.eventTypeId = eventTypeId;
 	}
 
-	public TopicDto getTopic() {
-		return topic;
+	public Long getTopicId() {
+		return topicId;
 	}
 
-	public void setTopic(TopicDto topic) {
-		this.topic = topic;
+	public void setTopicId(Long topicId) {
+		this.topicId = topicId;
 	}
 
-	public RoomDto getRoom() {
-		return room;
+	public Long getRoomId() {
+		return roomId;
 	}
 
-	public void setRoom(RoomDto room) {
-		this.room = room;
+	public void setRoomId(Long roomId) {
+		this.roomId = roomId;
 	}
 
-	public EmployeeDto getEmployeeOrganizer() {
-		return employeeOrganizer;
+	public Long getEmployeeOrganizerId() {
+		return employeeOrganizerId;
 	}
 
-	public void setEmployeeOrganizer(EmployeeDto employeeOrganizer) {
-		this.employeeOrganizer = employeeOrganizer;
+	public void setEmployeeOrganizerId(Long employeeOrganizerId) {
+		this.employeeOrganizerId = employeeOrganizerId;
 	}
 
 }
