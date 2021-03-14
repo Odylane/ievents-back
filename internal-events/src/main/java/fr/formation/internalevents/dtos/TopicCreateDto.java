@@ -3,14 +3,17 @@ package fr.formation.internalevents.dtos;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import fr.formation.internalevents.validation.UniqueName;
+
 public class TopicCreateDto {
-	
+
+	@UniqueName
 	@NotBlank
-	@Size(max=45)
+	@Size(max = 45)
 	private String name;
 
 	public TopicCreateDto() {
-		
+
 	}
 
 	public String getName() {
@@ -19,6 +22,6 @@ public class TopicCreateDto {
 
 	public void setName(String name) {
 		this.name = name;
-	}	
+	}
 
 }

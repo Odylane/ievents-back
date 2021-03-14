@@ -16,4 +16,6 @@ public interface TopicRepository extends JpaRepository<Topic, Long> {
 			+ "(top.id, top.name) from Topic top order by top.name asc")
 	List<TopicDto> getAllProjected();
 
+	boolean existsByName(String value);
+
 }

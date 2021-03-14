@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.formation.internalevents.config.EmployeeDetails;
 import fr.formation.internalevents.config.ResourceNotFoundException;
@@ -21,51 +22,62 @@ import fr.formation.internalevents.repositories.RoleRepository;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-	
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
-    private final EmployeeRepository employeeRepository;
-    
-    private final RoleRepository roleRepository;
-    
-    protected EmployeeServiceImpl(PasswordEncoder passwordEncoder, EmployeeRepository employeeRepository,
+
+	private final EmployeeRepository employeeRepository;
+
+	private final RoleRepository roleRepository;
+
+	protected EmployeeServiceImpl(PasswordEncoder passwordEncoder, EmployeeRepository employeeRepository,
 			RoleRepository roleRepository) {
 		this.passwordEncoder = passwordEncoder;
 		this.employeeRepository = employeeRepository;
 		this.roleRepository = roleRepository;
 	}
 
-    @Override
-    public void create(EmployeeCreateDto dto) {
-    	
-    	Role role = roleRepository.findByDefaultRole(true);
-    	Set<Role> roles = new HashSet<>();
-    	roles.add(role);
-    	Employee employee = new Employee();
-    	employee.setUsername(dto.getUsername());
-    	employee.setFirstname(dto.getFirstname());
-    	employee.setLastname(dto.getLastname());
-    	employee.setEmail(dto.getEmail());
-    	employee.setPassword(passwordEncoder.encode(dto.getPassword()));
-    	employee.setRoles(roles);
-    	employeeRepository.save(employee);
-    }
-    
-    // Throws UsernameNotFoundException (Spring contract)
-    @Override
-    public UserDetails loadUserByUsername(String username)
-	    throws UsernameNotFoundException {
-	EmployeeAuthDto user = employeeRepository.findByUsername(username)
-		.orElseThrow(() -> new UsernameNotFoundException(
-			"no employee found with username: " + username));
-	return new EmployeeDetails(user);
-    }
+	@Transactional
+	@Override
+	public void create(EmployeeCreateDto dto) {
 
-    // Throws ResourceNotFoundException (restful practice)
-    @Override
-    public EmployeeInfoDto getCurrentEmployeeInfo(Long id) {
-    	return employeeRepository.getById(id).orElseThrow(() -> new ResourceNotFoundException("with id:" + id));
-    }
-    
+		Role role = roleRepository.findByDefaultRole(true);
+		Set<Role> roles = new HashSet<>();
+		roles.add(role);
+		Employee employee = new Employee();
+		employee.setUsername(dto.getUsername());
+		employee.setFirstname(dto.getFirstname());
+		employee.setLastname(dto.getLastname());
+		employee.setEmail(dto.getEmail());
+		employee.setPassword(passwordEncoder.encode(dto.getPassword()));
+		employee.setRoles(roles);
+		employeeRepository.save(employee);
+	}
+
+	// Throws UsernameNotFoundException (Spring contract)
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		EmployeeAuthDto user = employeeRepository.findByUsername(username)
+				.orElseThrow(() -> new UsernameNotFoundException("no employee found with username: " + username));
+		return new EmployeeDetails(user);
+	}
+
+	// Throws ResourceNotFoundException (restful practice)
+	@Override
+	public EmployeeInfoDto getCurrentEmployeeInfo(Long id) {
+		return employeeRepository.getById(id).orElseThrow(() -> new ResourceNotFoundException("with id:" + id));
+	}
+
+	@Override
+	public boolean uniqueUsername(String value) {
+
+		return !employeeRepository.existsByUsername(value);
+	}
+
+	@Override
+	public boolean uniqueEmail(String value) {
+
+		return !employeeRepository.existsByEmail(value);
+	}
+
 }
