@@ -17,20 +17,20 @@ import org.springframework.stereotype.Component;
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CorsFilter implements Filter {
-	
+
+	// allowedOrigin
 	@Value("${jwt-internal-events-server.allowedOrigin}")
-    private String allowedOrigin;
+	private String allowedOrigin;
 
 	@Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
-	HttpServletResponse response = (HttpServletResponse) servletResponse;
-	response.setHeader("Access-Control-Allow-Origin", allowedOrigin);
-	response.setHeader("Access-Control-Allow-Credentials", "true");
-	response.setHeader("Access-Control-Allow-Headers", "x-requested-with, Authorization, Content-Type");
-	response.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
-	chain.doFilter(servletRequest, servletResponse);
-    }
-	
-	
+	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain)
+			throws IOException, ServletException {
+		HttpServletResponse response = (HttpServletResponse) servletResponse;
+		response.setHeader("Access-Control-Allow-Origin", allowedOrigin);
+		response.setHeader("Access-Control-Allow-Credentials", "true");
+		response.setHeader("Access-Control-Allow-Headers", "x-requested-with, Authorization, Content-Type");
+		response.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+		chain.doFilter(servletRequest, servletResponse);
+	}
 
 }

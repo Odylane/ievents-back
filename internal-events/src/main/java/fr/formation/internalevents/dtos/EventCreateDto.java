@@ -10,7 +10,17 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-//@NotAdequateRoomCapacity
+import fr.formation.internalevents.validation.NotAdequateRoomCapacity;
+import fr.formation.internalevents.validation.NotBeforeStartDateTime;
+
+/**
+ * A DTO that specifies the validation rules in order to create an event.
+ * 
+ * @author ktrin
+ *
+ */
+@NotBeforeStartDateTime
+@NotAdequateRoomCapacity
 public class EventCreateDto {
 
 	@NotBlank
@@ -30,7 +40,7 @@ public class EventCreateDto {
 	private String description;
 
 	@Min(value = 2)
-	private int numberOfPlaces;
+	private int numberOfAttendees;
 
 	@NotEmpty(message = "Merci de renseigner le nom de l'intervenant")
 	@Size(max = 255)
@@ -84,12 +94,12 @@ public class EventCreateDto {
 		this.description = description;
 	}
 
-	public int getNumberOfPlaces() {
-		return numberOfPlaces;
+	public int getNumberOfAttendees() {
+		return numberOfAttendees;
 	}
 
-	public void setNumberOfPlaces(int numberOfPlaces) {
-		this.numberOfPlaces = numberOfPlaces;
+	public void setNumberOfPlaces(int numberOfAttendees) {
+		this.numberOfAttendees = numberOfAttendees;
 	}
 
 	public String getSpeakerName() {

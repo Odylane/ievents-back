@@ -5,6 +5,16 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+/**
+ * This class represents a {@code Building} entity and it is mapped to a
+ * database.
+ * <p>
+ * The name of the database table {@code "buildings"} is specified for the
+ * mapping.
+ * 
+ * @author Catherine Nobyn
+ *
+ */
 @Entity
 @Table(name = "buildings", uniqueConstraints = { @UniqueConstraint(name = "UK_name", columnNames = "name") })
 public class Building extends AbstractEntity {

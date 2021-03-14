@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.formation.internalevents.dtos.EventCreateDto;
 import fr.formation.internalevents.dtos.EventFullInfoDto;
@@ -42,6 +43,7 @@ public class EventServiceImpl implements EventService {
 		this.roomRepo = roomRepo;
 	}
 
+	@Transactional
 	@Override
 	public void create(EventCreateDto dto) {
 
@@ -52,7 +54,7 @@ public class EventServiceImpl implements EventService {
 		event.setSpeakerName(dto.getSpeakerName());
 		event.setStartDateTime(dto.getStartDateTime());
 		event.setEndDateTime(dto.getEndDateTime());
-		event.setNumberOfPlaces(dto.getNumberOfPlaces());
+		event.setNumberOfAttendees(dto.getNumberOfAttendees());
 
 		setEventType(event, dto.getEventTypeId());
 		setRoom(event, dto.getRoomId());
@@ -87,6 +89,7 @@ public class EventServiceImpl implements EventService {
 
 		List<Event> events = eventRepo.findByStartDateTimeGreaterThanOrderByStartDateTimeAsc(LocalDateTime.now());
 		List<EventShortInfoDto> dtos = new ArrayList<>();
+
 		for (Event event : events) {
 			EventShortInfoDto dto = convertFrom(event);
 			dtos.add(dto);
@@ -122,10 +125,10 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public boolean checkRoomCapacity(int numberOfPlacesByEvent, Long RoomIdRequested) {
+	public boolean checkRoomCapacity(int numberOfAttendeesByEvent, Long RoomIdRequested) {
 		Room roomRequested = roomRepo.findById(RoomIdRequested).orElseThrow(() -> new NullPointerException());
 		int roomCapacity = roomRequested.getCapacity();
-		return (numberOfPlacesByEvent <= roomCapacity);
+		return (numberOfAttendeesByEvent <= roomCapacity);
 	}
 
 }

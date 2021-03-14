@@ -28,16 +28,33 @@ public class EventController {
 		this.service = service;
 	}
 
+	/**
+	 * Endpoint to create a resource (event)
+	 * 
+	 */
 	@PostMapping
 	public void createEvent(@Valid @RequestBody EventCreateDto dto) {
 		service.create(dto);
 	}
 
+	/**
+	 * Endpoint to retrieve a short info of all the resources (events)
+	 * 
+	 * @return a view of all the resources
+	 * 
+	 */
 	@GetMapping
 	public List<EventShortInfoDto> getAll() {
 		return service.getAll();
 	}
 
+	/**
+	 * Endpoint to retrieve the details of a single resource (event) with given id
+	 * 
+	 * @param id, the id of the resource to retrieve
+	 * @return a view of the resource
+	 * 
+	 */
 	@GetMapping("{id}")
 	public EventFullInfoDto getOneEvent(@PathVariable("id") Long id) {
 		return service.getOneEvent(id);

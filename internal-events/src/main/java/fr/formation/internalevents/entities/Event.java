@@ -11,6 +11,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+/**
+ * This class is an {@code Event} entity and is mapped to a database table.
+ * <p>
+ * The name of the database table {@code "events"} is specified for the mapping.
+ * 
+ * @author Catherine Nobyn
+ *
+ */
 @Entity
 @Table(name = "events", uniqueConstraints = {
 		@UniqueConstraint(name = "UK_start_date_time_speaker_name", columnNames = { "start_date_time",
@@ -33,8 +41,8 @@ public class Event extends AbstractEntity {
 	@Column(nullable = false, length = 2000)
 	private String description;
 
-	@Column(name = "nb_of_places", nullable = false)
-	private int numberOfPlaces;
+	@Column(name = "nb_of_attendees", nullable = false)
+	private int numberOfAttendees;
 
 	@Column(name = "speaker_name", nullable = false, length = 255)
 	private String speakerName;
@@ -90,12 +98,12 @@ public class Event extends AbstractEntity {
 		this.description = description;
 	}
 
-	public int getNumberOfPlaces() {
-		return numberOfPlaces;
+	public int getNumberOfAttendees() {
+		return numberOfAttendees;
 	}
 
-	public void setNumberOfPlaces(int numberOfPlaces) {
-		this.numberOfPlaces = numberOfPlaces;
+	public void setNumberOfAttendees(int numberOfAttendees) {
+		this.numberOfAttendees = numberOfAttendees;
 	}
 
 	public String getSpeakerName() {
@@ -141,9 +149,9 @@ public class Event extends AbstractEntity {
 	@Override
 	public String toString() {
 		return "Event [title=" + title + ", startDateTime=" + startDateTime + ", endDateTime=" + endDateTime
-				+ ", description=" + description + ", numberOfPlaces=" + numberOfPlaces + ", speakerName=" + speakerName
-				+ ", eventType=" + eventType + ", topic=" + topic + ", room=" + room + ", employeeOrganizer="
-				+ employeeOrganizer + "]";
+				+ ", description=" + description + ", numberOfAttendees=" + numberOfAttendees + ", speakerName="
+				+ speakerName + ", eventType=" + eventType + ", topic=" + topic + ", room=" + room
+				+ ", employeeOrganizer=" + employeeOrganizer + "]";
 	}
 
 }

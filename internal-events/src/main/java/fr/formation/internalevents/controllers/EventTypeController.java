@@ -20,7 +20,8 @@ public class EventTypeController {
 	}
 
 	/*
-	 * get all event types
+	 * Endpoint to retrieve all the event types
+	 * 
 	 */
 	@GetMapping
 	public List<EventTypeDto> getAll() {

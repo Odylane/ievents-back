@@ -2,6 +2,10 @@ package fr.formation.internalevents.dtos;
 
 import java.time.LocalDateTime;
 
+/**
+ * An interface representing a view of an {@code Event} detailed
+ * 
+ */
 public interface EventFullInfoDto {
 
 	Long getId();
@@ -14,7 +18,7 @@ public interface EventFullInfoDto {
 
 	String getDescription();
 
-	int getNumberOfPlaces();
+	int getNumberOfAttendees();
 
 	String getSpeakerName();
 

@@ -2,15 +2,18 @@ package fr.formation.internalevents.dtos;
 
 import java.time.LocalDateTime;
 
+/**
+ * 
+ * An interface representing a view of a brief summary of an {@code Event}
+ *
+ */
 public class EventShortInfoDto {
 
-	private Long idEvent;
+	private Long id;
 
 	private String title;
 
 	private LocalDateTime startDateTime;
-
-	private LocalDateTime endDateTime;
 
 	private String nameRoom;
 
@@ -21,12 +24,12 @@ public class EventShortInfoDto {
 	public EventShortInfoDto() {
 	}
 
-	public Long getIdEvent() {
-		return idEvent;
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdEvent(Long idEvent) {
-		this.idEvent = idEvent;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getTitle() {
@@ -43,14 +46,6 @@ public class EventShortInfoDto {
 
 	public void setStartDateTime(LocalDateTime startDateTime) {
 		this.startDateTime = startDateTime;
-	}
-
-	public LocalDateTime getEndDateTime() {
-		return endDateTime;
-	}
-
-	public void setEndDateTime(LocalDateTime endDateTime) {
-		this.endDateTime = endDateTime;
 	}
 
 	public String getNameRoom() {

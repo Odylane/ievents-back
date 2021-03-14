@@ -6,6 +6,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+/**
+ * This common superclass defines how objects ids are generated.
+ * 
+ * @author Catherine Nobyn
+ *
+ */
 @MappedSuperclass
 public abstract class AbstractEntity {
 
