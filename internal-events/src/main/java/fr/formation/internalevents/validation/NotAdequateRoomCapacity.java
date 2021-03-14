@@ -14,7 +14,7 @@ import javax.validation.Payload;
 @Constraint(validatedBy = NotAdequateRoomCapacityValidator.class)
 public @interface NotAdequateRoomCapacity {
 
-	String message() default "La capacité de la salle est insuffisante par rapport au nombre de places prévu pour votre événement.";
+	String message() default "La capacité de la salle est insuffisante par rapport au nombre de participants prévu pour votre événement.";
 
 	Class<?>[] groups() default {};
 

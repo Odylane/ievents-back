@@ -16,10 +16,10 @@ public class NotAdequateRoomCapacityValidator implements ConstraintValidator<Not
 
 	@Override
 	public boolean isValid(EventCreateDto dto, ConstraintValidatorContext context) {
-		int numberOfPlacesByEvent = dto.getNumberOfPlaces();
-		Long RoomIdRequested = dto.getRoom().getId();
+		int numberOfAttendeesByEvent = dto.getNumberOfAttendees();
+		Long RoomIdRequested = dto.getRoomId();
 
-		return service.checkRoomCapacity(numberOfPlacesByEvent, RoomIdRequested);
+		return service.checkRoomCapacity(numberOfAttendeesByEvent, RoomIdRequested);
 	}
 
 }

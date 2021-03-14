@@ -6,6 +6,15 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+/**
+ * This class represents a {@code Role} entity and it is mapped to a database
+ * table.
+ * <p>
+ * The name of the database table {@code "roles"} is specified for the mapping.
+ * 
+ * @author Catherine Nobyn
+ *
+ */
 @Entity
 @Table(name = "roles", uniqueConstraints = { @UniqueConstraint(name = "UK_name", columnNames = { "name" }) })
 public class Role extends AbstractEntity {

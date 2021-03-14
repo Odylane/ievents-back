@@ -20,7 +20,7 @@ public class RoomController {
 	}
 
 	/*
-	 * get all rooms
+	 * Endpoint to retrieve all the rooms
 	 */
 	@GetMapping
 	public List<RoomDto> getAll() {

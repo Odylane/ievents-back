@@ -9,6 +9,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+/**
+ * This class represents a {@code Room} entity and it is mapped to a database
+ * table.
+ * <p>
+ * The name of the database table {@code "rooms"} is specified for the mapping.
+ * 
+ * @author Catherine Nobyn
+ *
+ */
+
 @Entity
 @Table(name = "rooms", uniqueConstraints = {
 		@UniqueConstraint(name = "UK_name", columnNames = { "name" }) }, indexes = {
