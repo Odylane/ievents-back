@@ -20,6 +20,9 @@ public abstract class AbstractEntity {
 	@Column(name = "id")
 	private Long id;
 
+	public AbstractEntity() {
+	}
+
 	public Long getId() {
 		return id;
 	}

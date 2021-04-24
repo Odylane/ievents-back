@@ -6,6 +6,14 @@ import javax.validation.ConstraintValidatorContext;
 import fr.formation.internalevents.dtos.EventCreateDto;
 import fr.formation.internalevents.services.EventService;
 
+/**
+ * 
+ * Validator for {@link NotAdequateRoomCapacity} constraint
+ * 
+ * @author Catherine Nobyn
+ *
+ */
+
 public class NotAdequateRoomCapacityValidator implements ConstraintValidator<NotAdequateRoomCapacity, EventCreateDto> {
 
 	private final EventService service;

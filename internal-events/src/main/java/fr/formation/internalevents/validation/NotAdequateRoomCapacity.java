@@ -9,6 +9,14 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+/**
+ * Custom annotation {@code NotAdequateRoomCapacity} to check the room's
+ * capacity
+ * 
+ * @author Catherine Nobyn
+ *
+ */
+
 @Retention(RUNTIME)
 @Target(TYPE)
 @Constraint(validatedBy = NotAdequateRoomCapacityValidator.class)

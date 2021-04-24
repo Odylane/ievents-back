@@ -9,12 +9,19 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+/**
+ * Custom annotation {@code UniqueUsername} to ensure the username is unique
+ * 
+ * @author Catherine Nobyn
+ *
+ */
+
 @Retention(RUNTIME)
 @Target(ElementType.FIELD)
 @Constraint(validatedBy = UniqueUsernameValidator.class)
 public @interface UniqueUsername {
 
-	String message() default "Cet identifiant existe déjà";
+	String message() default "Saisie invalide";
 
 	Class<?>[] groups() default {};
 

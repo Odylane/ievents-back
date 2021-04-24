@@ -9,12 +9,19 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+/**
+ * Custom annotation {@code UniqueName} to ensure the topic is unique
+ * 
+ * @author Catherine Nobyn
+ *
+ */
+
 @Retention(RUNTIME)
 @Target(FIELD)
 @Constraint(validatedBy = UniqueNameValidator.class)
 public @interface UniqueName {
 
-	String message() default "Cet identifiant existe déjà";
+	String message() default "Cette thématique existe déjà";
 
 	Class<?>[] groups() default {};
 

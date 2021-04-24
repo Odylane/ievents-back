@@ -5,6 +5,14 @@ import javax.validation.ConstraintValidatorContext;
 
 import fr.formation.internalevents.services.TopicService;
 
+/**
+ * 
+ * Validator for {@link UniqueName} constraint
+ * 
+ * @author Catherine Nobyn
+ *
+ */
+
 public class UniqueNameValidator implements ConstraintValidator<UniqueName, String> {
 
 	private TopicService service;

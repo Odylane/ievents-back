@@ -5,10 +5,18 @@ import javax.validation.constraints.Size;
 
 import fr.formation.internalevents.validation.UniqueName;
 
+/**
+ * {@code TopicCreateDto}, a DTO that specifies the validation rules to create a
+ * topic.
+ * 
+ * @author Catherine Nobyn
+ *
+ */
+
 public class TopicCreateDto {
 
 	@UniqueName
-	@NotBlank
+	@NotBlank(message = "Veuillez saisir un nom de thématique")
 	@Size(max = 45)
 	private String name;
 

@@ -14,7 +14,7 @@ import javax.validation.Payload;
 @Constraint(validatedBy = UniqueEmailValidator.class)
 public @interface UniqueEmail {
 
-	String message() default "Cet adresse email existe déjà";
+	String message() default "Saisie invalide";
 
 	Class<?>[] groups() default {};
 
