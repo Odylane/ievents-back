@@ -11,7 +11,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import fr.formation.internalevents.validation.NotAdequateRoomCapacity;
-import fr.formation.internalevents.validation.NotBeforeStartDateTime;
 
 /**
  * A DTO that specifies the validation rules in order to create an event.
@@ -19,7 +18,7 @@ import fr.formation.internalevents.validation.NotBeforeStartDateTime;
  * @author ktrin
  *
  */
-@NotBeforeStartDateTime
+
 @NotAdequateRoomCapacity
 public class EventCreateDto {
 
@@ -42,7 +41,7 @@ public class EventCreateDto {
 	@Min(value = 2)
 	private int numberOfAttendees;
 
-	@NotEmpty(message = "Merci de renseigner le nom de l'intervenant")
+	@NotEmpty
 	@Size(max = 255)
 	private String speakerName;
 
@@ -54,9 +53,6 @@ public class EventCreateDto {
 
 	@Valid
 	private Long roomId;
-
-	@Valid
-	private Long employeeOrganizerId;
 
 	public EventCreateDto() {
 		//
@@ -132,14 +128,6 @@ public class EventCreateDto {
 
 	public void setRoomId(Long roomId) {
 		this.roomId = roomId;
-	}
-
-	public Long getEmployeeOrganizerId() {
-		return employeeOrganizerId;
-	}
-
-	public void setEmployeeOrganizerId(Long employeeOrganizerId) {
-		this.employeeOrganizerId = employeeOrganizerId;
 	}
 
 }

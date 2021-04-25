@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 /**
  * 
- * An interface representing a view of a brief summary of an {@code Event}
+ * This DTO represents a view of a brief summary of an {@code Event}
  *
  */
 public class EventShortInfoDto {

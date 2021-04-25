@@ -35,7 +35,7 @@ public class Employee extends AbstractEntity {
 	@Column(nullable = false, length = 100)
 	private String lastname;
 
-	@Column(nullable = false)
+	@Column(nullable = false, length = 255)
 	private String email;
 
 	@Column(nullable = false, length = 100)
@@ -50,13 +50,6 @@ public class Employee extends AbstractEntity {
 		//
 	}
 
-	/**
-	 * Creates a new user(employee)
-	 *
-	 * @param password an encrypted password
-	 * @param username a unique username
-	 * @param roles    some roles
-	 */
 	public Employee(String username, String password, Set<Role> roles) {
 		this.username = username;
 		this.password = password;

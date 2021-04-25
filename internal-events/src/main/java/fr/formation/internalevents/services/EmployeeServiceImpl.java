@@ -11,12 +11,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.formation.internalevents.config.EmployeeDetails;
-import fr.formation.internalevents.config.ResourceNotFoundException;
 import fr.formation.internalevents.dtos.EmployeeAuthDto;
 import fr.formation.internalevents.dtos.EmployeeCreateDto;
 import fr.formation.internalevents.dtos.EmployeeInfoDto;
 import fr.formation.internalevents.entities.Employee;
 import fr.formation.internalevents.entities.Role;
+import fr.formation.internalevents.exceptions.ResourceNotFoundException;
 import fr.formation.internalevents.repositories.EmployeeRepository;
 import fr.formation.internalevents.repositories.RoleRepository;
 
@@ -54,7 +54,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employeeRepository.save(employee);
 	}
 
-	// Throws UsernameNotFoundException (Spring contract)
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		EmployeeAuthDto user = employeeRepository.findByUsername(username)
@@ -62,7 +61,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return new EmployeeDetails(user);
 	}
 
-	// Throws ResourceNotFoundException (restful practice)
 	@Override
 	public EmployeeInfoDto getCurrentEmployeeInfo(Long id) {
 		return employeeRepository.getById(id).orElseThrow(() -> new ResourceNotFoundException("with id:" + id));

@@ -16,7 +16,4 @@ public interface EventService {
 
 	boolean checkRoomCapacity(int numberOfPlacesByEvent, Long RoomIdRequested);
 
-	// boolean checkEndDateTime(LocalDateTime startDateTime, LocalDateTime
-	// endDateTime);
-
 }

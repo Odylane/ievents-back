@@ -10,42 +10,22 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 
 @Configuration
 @EnableResourceServer
-//Enable or not security annotations (@Secured, @PreAuthorize, @PostAuthorize)
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
-	// allowedOrigin if CorsFilter declared as @Bean
-    // @Value("${jwt-internal-events-server.allowedOrigin}")
-    // private String allowedOrigin;
+	/**
+	 * Configures the HTTP security for the resource server.
+	 *
+	 * @param the HttpSecurity to configure
+	 */
+	@Override
+	public void configure(HttpSecurity http) throws Exception {
 
-    /**
-     * Configures the HTTP security for the resource server.
-     *
-     * @param the HttpSecurity to configure
-     */
-    @Override
-    public void configure(HttpSecurity http) throws Exception {
-	// Disable HTTP Basic, no client authentication
-	http.httpBasic().disable().csrf().disable().sessionManagement()
-		.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-		// addFilterBefore if CorsFilter declared as @Bean
-		// .addFilterBefore(corsFilter(), SessionManagementFilter.class)
-		// Allow OPTIONS requests (preflights)
-		.authorizeRequests().antMatchers(HttpMethod.OPTIONS).permitAll()
-		.and()
-		// "/api/public/**" for anyone even anonymous
-		.authorizeRequests().antMatchers("/api/public/**").permitAll()
-		/*
-		 * "/api/userInfo", "/api/private/**" for fully authenticated
-		 * (not anonymous)
-		 */
-		.antMatchers("/api/userInfo", "/api/private/**")
-		.authenticated();
-    }
-    // We can declare the CorsFilter as a @Bean
-    // or @Component (see CorsFilter class)
-    // @Bean
-    // CorsFilter corsFilter() {
-    // return new CorsFilter(allowedOrigin);
-    // }
+		http.httpBasic().disable().csrf().disable().sessionManagement()
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
+				.antMatchers(HttpMethod.OPTIONS).permitAll().and().authorizeRequests().antMatchers("/api/employees")
+				.permitAll().antMatchers("/api/userInfo", "/api/events", "/api/topics", "/api/rooms", "/api/eventTypes")
+				.authenticated();
+
+	}
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import fr.formation.internalevents.config.SecurityHelper;
 import fr.formation.internalevents.dtos.EventCreateDto;
 import fr.formation.internalevents.dtos.EventFullInfoDto;
 import fr.formation.internalevents.dtos.EventShortInfoDto;
@@ -15,6 +16,7 @@ import fr.formation.internalevents.entities.Event;
 import fr.formation.internalevents.entities.EventType;
 import fr.formation.internalevents.entities.Room;
 import fr.formation.internalevents.entities.Topic;
+import fr.formation.internalevents.exceptions.ResourceNotFoundException;
 import fr.formation.internalevents.repositories.EmployeeRepository;
 import fr.formation.internalevents.repositories.EventRepository;
 import fr.formation.internalevents.repositories.EventTypeRepository;
@@ -59,7 +61,10 @@ public class EventServiceImpl implements EventService {
 		setEventType(event, dto.getEventTypeId());
 		setRoom(event, dto.getRoomId());
 		setTopic(event, dto.getTopicId());
-		setEmployee(event, dto.getEmployeeOrganizerId());
+
+		Long userId = SecurityHelper.getUserId();
+		Employee employeeOrganizer = employeeRepo.getOne(userId);
+		event.setEmployeeOrganizer(employeeOrganizer);
 
 		eventRepo.save(event);
 	}
@@ -77,11 +82,6 @@ public class EventServiceImpl implements EventService {
 	private void setTopic(Event event, Long topicId) {
 		Topic topic = topicRepo.getOne(topicId);
 		event.setTopic(topic);
-	}
-
-	private void setEmployee(Event event, Long employeeOrganizerId) {
-		Employee employeeOrganizer = employeeRepo.getOne(employeeOrganizerId);
-		event.setEmployeeOrganizer(employeeOrganizer);
 	}
 
 	@Override
@@ -120,7 +120,7 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public EventFullInfoDto getOneEvent(Long id) {
 
-		return eventRepo.getById(id);
+		return eventRepo.getById(id).orElseThrow(() -> new ResourceNotFoundException("no event with id: " + id));
 
 	}
 

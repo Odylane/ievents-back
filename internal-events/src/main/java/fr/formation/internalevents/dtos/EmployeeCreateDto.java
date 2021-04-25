@@ -18,7 +18,7 @@ public class EmployeeCreateDto {
 	@UniqueUsername
 	@NotBlank
 	@Size(max = 11)
-	@Pattern(regexp = "^[G][L]0{2}(\\d){7}$", message = "Votre identifiant correspond à votre matricule RH GL00xxxxxxx")
+	@Pattern(regexp = "^[G][L]0{2}(\\d){7}$", message = "L'identifiant correspond à votre matricule RH GL00xxxxxxx")
 	private String username;
 
 	@NotBlank
@@ -33,12 +33,13 @@ public class EmployeeCreateDto {
 
 	@UniqueEmail
 	@NotBlank
+	@Size(max = 255)
 	@Pattern(regexp = "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$")
 	private String email;
 
 	@NotBlank
 	@Size(min = 8, max = 12)
-	@Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@§;#$%?/,^&*]).{8,12}$", message = "Votre mot de passe doit contenir au moins un chiffre, une minuscule, une majuscule, un caractère spécial et être compris en 8 et 12 caractères")
+	@Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@§;#$%?/,^&*]).{8,12}$", message = "Le mot de passe doit contenir au moins un chiffre, une minuscule, une majuscule, un caractère spécial et être compris en 8 et 12 caractères")
 	private String password;
 
 	public EmployeeCreateDto() {

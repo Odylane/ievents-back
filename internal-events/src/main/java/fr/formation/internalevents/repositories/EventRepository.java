@@ -2,6 +2,7 @@ package fr.formation.internalevents.repositories;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -26,6 +27,6 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 	 * @param id, the id of the event to retrieve
 	 * @return a view of an event
 	 */
-	EventFullInfoDto getById(Long id);
+	Optional<EventFullInfoDto> getById(Long id);
 
 }
