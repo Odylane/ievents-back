@@ -3,6 +3,7 @@ package fr.formation.internalevents.controllers;
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,7 +35,7 @@ public class EmployeeController {
 
 	@PostMapping("/employees")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public void addNewAccount(@Valid @RequestBody EmployeeCreateDto inputs) {
+	protected void addNewAccount(@Valid @RequestBody EmployeeCreateDto inputs) throws MethodArgumentNotValidException {
 		service.create(inputs);
 	}
 
@@ -47,7 +48,7 @@ public class EmployeeController {
 	 */
 
 	@GetMapping("/userInfo")
-	public EmployeeInfoDto userInfo() {
+	protected EmployeeInfoDto userInfo() {
 		Long userId = SecurityHelper.getUserId();
 		return service.getCurrentEmployeeInfo(userId);
 	}
