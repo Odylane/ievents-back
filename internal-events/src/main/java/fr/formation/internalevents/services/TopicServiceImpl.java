@@ -3,6 +3,7 @@ package fr.formation.internalevents.services;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.formation.internalevents.dtos.TopicCreateDto;
 import fr.formation.internalevents.dtos.TopicDto;
@@ -23,6 +24,7 @@ public class TopicServiceImpl implements TopicService {
 		return topicRepo.getAllProjected();
 	}
 
+	@Transactional
 	@Override
 	public void create(TopicCreateDto dto) {
 

@@ -39,10 +39,10 @@ public class TopicController {
 	 * Endpoint to add a topic in the database, accessible with role "ADMIN"
 	 */
 
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public void addNewTopic(@Valid @RequestBody TopicCreateDto input) {
+	public void addTopic(@Valid @RequestBody TopicCreateDto input) {
 		service.create(input);
 	}
 
